@@ -80,9 +80,9 @@ Update your application.yml with your GCP values
 
 Run:
 
-mvn spring-boot:run
-
-
+```bash
+$ mvn spring-boot:run
+```
 When the app starts, you will see logs like:
 
 Starting Pub/Sub subscriber…
@@ -104,11 +104,14 @@ Mocks are used so Pub/Sub is not called for real.
 
 Use Postman, curl, or browser to send a test message:
 
+```bash
 http://localhost:8080/pub?message=Hello%20World
-
+```
 
 You should see in logs:
 
+```bash
 Published message ID: 123456
+```
 
 
