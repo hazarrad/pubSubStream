@@ -1,5 +1,6 @@
 package com.micro.pubstream.api;
 
+import com.google.api.core.ApiFuture;
 import com.google.cloud.pubsub.v1.Publisher;
 import com.google.cloud.pubsub.v1.Subscriber;
 import com.google.protobuf.ByteString;
@@ -31,15 +32,15 @@ public class PubSubstreamApi {
 
         ByteString data = ByteString.copyFromUtf8(message);
         PubsubMessage pubsubMessage = PubsubMessage.newBuilder().setData(data).build();
-        String messageId = publisher.publish(pubsubMessage).get();
+        ApiFuture<String> apiFuture = publisher.publish(pubsubMessage);
+        String messageId = apiFuture.get();
         log.info("Published message ID: {}", messageId);
-
         return "Published Successfully";
 
     }
 
     @EventListener(ApplicationReadyEvent.class)
-    public void start() {
+    public void startSubscriber() {
         log.info("Starting Pub/Sub subscriber... {}", subscriber.getSubscriptionNameString());
         subscriber.startAsync().awaitRunning();
         log.info("Subscriber started for: {}", subscriber.getSubscriptionNameString());
