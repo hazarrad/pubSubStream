@@ -1,12 +1,11 @@
 spring:
   application:
     name: pubsubstream
-
-
+    
 gcp:
   resourcesFolder: /app/resources/
-  bucketName: exportbucks
+  bucketName: bucket
   key: \key.json
-  projectId: gke-greentech
-  topicId: HEY
-  subscription: HEY-sub
+  projectId: gke-test
+  topicId: TEST
+  subscription: TEST-sub
